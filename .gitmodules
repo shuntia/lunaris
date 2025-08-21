@@ -1,0 +1,7 @@
+[submodule "lunaris_core"]
+	path=lunaris_core
+	url=https://github.com/shuntia/lunaris_core
+
+[submodule "lunaris_api"]
+	path=lunaris_api
+	url=https://github.com/shuntia/lunaris_api
