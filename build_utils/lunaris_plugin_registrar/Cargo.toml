@@ -1,0 +1,16 @@
+[package]
+name = "lunaris_plugin_registrar"
+version = "0.1.0"
+authors.workspace = true
+edition.workspace = true
+
+[dependencies]
+cargo_toml = "0.22.3"
+chrono = "0.4.41"
+serde = { workspace = true, features = ["derive"] }
+tempfile = "3.20.0"
+toml.workspace = true
+toml_edit = "0.23.3"
+tracing.workspace = true
+tracing-subscriber.workspace = true
+walkdir = "2.5.0"
