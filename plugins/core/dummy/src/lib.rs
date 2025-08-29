@@ -1,16 +1,13 @@
 use lunaris_api::plugin::Plugin;
 
-pub struct TestPlugin {}
+pub struct Dummy{}
 
-impl Plugin for TestPlugin {
-    fn new() -> Self
-    where
-        Self: Sized,
-    {
-        Self {}
+impl Plugin for Dummy{
+    fn new()->Self where Self:Sized{
+        Dummy{}
     }
     fn name(&self) -> &'static str {
-        "test plugin 1"
+        "dummy"
     }
     fn reset(&mut self, ctx: lunaris_api::plugin::PluginContext) {}
     fn report(&self, ctx: lunaris_api::plugin::PluginContext) -> lunaris_api::plugin::PluginReport {
@@ -20,14 +17,6 @@ impl Plugin for TestPlugin {
     fn update_world(&mut self, ctx: lunaris_api::plugin::PluginContext) {}
     fn register_menu(&self, menu_bar: &mut lunaris_api::egui::MenuBar) {}
     fn init(&self, ctx: lunaris_api::plugin::PluginContext) {
-        println!("init!")
     }
 }
 
-impl lunaris_api::plugin::Gui for TestPlugin {
-    fn ui(&self, ui: &mut lunaris_api::egui::Ui, ctx: lunaris_api::plugin::PluginContext) {
-        let color = egui::epaint::Hsva::new(0.103, 0.5, 0.5, 1.0);
-        ui.painter().rect_filled(ui.max_rect(), 0.0, color);
-        ui.label("My first plugin!");
-    }
-}

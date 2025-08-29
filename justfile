@@ -7,6 +7,11 @@ build-release:
 cleanup:
     @cargo run --package lunaris_build_cleaner
 
+run:
+    -just prepare
+    cargo run --package lunaris_core
+    just cleanup
+
 build-full:
     just prepare
     - just build-release
@@ -21,6 +26,13 @@ build:
 check:
     -just prepare
     cargo check --package lunaris_core
+
+clippy:
+    -just prepare
+    cargo clippy --package lunaris_core
+
+c:
+    -just clippy
 
 dbg:
     @cargo build --package lunaris_core
