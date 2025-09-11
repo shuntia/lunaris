@@ -1,0 +1,10 @@
+[package]
+name = "profiler"
+version = "0.1.0"
+authors.workspace = true
+edition.workspace = true
+
+[dependencies]
+inventory.workspace = true
+lunaris_api.workspace = true
+tokio.workspace = true

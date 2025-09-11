@@ -1,9 +1,8 @@
 [package]
 name = "dummy"
 version = "0.0.0"
-authors.workspace = true
-edition.workspace = true
 
 [dependencies]
-lunaris_api = { path = "../../../lunaris_api" }
+inventory.workspace = true
+lunaris_api.workspace = true
 

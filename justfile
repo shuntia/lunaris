@@ -1,4 +1,7 @@
+set shell := ["bash", "-cu"]
+
 run:
+    just update
     cargo run --package lunaris_core
 
 rr:
@@ -21,3 +24,6 @@ c:
 
 dbg:
     @cargo build --package lunaris_core
+
+update:
+    cargo run -q -p linker_updater -- "linker/Cargo.toml" "plugins/"

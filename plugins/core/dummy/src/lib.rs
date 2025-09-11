@@ -1,10 +1,16 @@
-use lunaris_api::plugin::Plugin;
+use lunaris_api::{export_plugin, plugin::Plugin, util::error::NResult};
+extern crate lunaris_api;
 
-pub struct Dummy{}
+export_plugin!(Dummy);
 
-impl Plugin for Dummy{
-    fn new()->Self where Self:Sized{
-        Dummy{}
+pub struct Dummy {}
+
+impl Plugin for Dummy {
+    fn new() -> Self
+    where
+        Self: Sized,
+    {
+        Dummy {}
     }
     fn name(&self) -> &'static str {
         "dummy"
@@ -13,10 +19,8 @@ impl Plugin for Dummy{
     fn report(&self, ctx: lunaris_api::plugin::PluginContext) -> lunaris_api::plugin::PluginReport {
         lunaris_api::plugin::PluginReport::Operational
     }
-    fn shutdown(self, ctx: lunaris_api::plugin::PluginContext) {}
-    fn update_world(&mut self, ctx: lunaris_api::plugin::PluginContext) {}
+    fn shutdown(&mut self, ctx: lunaris_api::plugin::PluginContext) {}
+    fn update_world(&mut self, ctx: lunaris_api::plugin::PluginContext) -> NResult { Ok(()) }
     fn register_menu(&self, menu_bar: &mut lunaris_api::egui::MenuBar) {}
-    fn init(&self, ctx: lunaris_api::plugin::PluginContext) {
-    }
+    fn init(&self, ctx: lunaris_api::plugin::PluginContext) -> NResult { Ok(()) }
 }
-

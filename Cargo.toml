@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["lunaris_api", "lunaris_core", "plugins/*/*"]
+members = ["linker", "lunaris_api", "lunaris_core", "plugins/*/*", "tools/*"]
 default-members = ["lunaris_api", "lunaris_core", "plugins/*/*"]
 
 [workspace.package]
@@ -9,10 +9,11 @@ edition = "2024"
 
 [workspace.dependencies]
 bevy_ecs = "0.16.1"
-egui = "0.32.2"
+egui = "0.32.3"
 fluent = "0.17.0"
 futures = "0.3.31"
 inventory = "0.3.21"
+linker = { path = "linker" }
 lunaris_api = { path = "lunaris_api" }
 slab = "0.4.11"
 thiserror = "2.0.16"
