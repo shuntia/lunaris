@@ -1,7 +1,0 @@
-[package]
-name = "lunaris_build_cleaner"
-version = "0.1.0"
-authors.workspace = true
-edition.workspace = true
-
-[dependencies]
