@@ -6,6 +6,14 @@ Do not assume that anything, including the API is stable.
 
 # How to build
 
+## Requirements
+
+The build and execution of the program requires Just and Rust.
+
+## Prepare git submodules
+
+`git submodule init;git submodule update`
+
 ## Just run(debug)
 
 `just run`
