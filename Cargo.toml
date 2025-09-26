@@ -18,11 +18,11 @@ lunaris_api = { path = "lunaris_api" }
 slab = "0.4.11"
 thiserror = "2.0.16"
 tokio = { version = "1.47.1", features = ["full", "tracing"] }
-toml = "0.9.5"
+toml = "0.9.7"
 tracing = "0.1.41"
 tracing-subscriber = "0.3.20"
 wgpu = "26.0.1"
 
 [workspace.dependencies.serde]
-version = "1.0.219"
+version = "1.0.226"
 features = ["derive"]

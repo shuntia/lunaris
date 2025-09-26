@@ -33,7 +33,7 @@ fn find_crates(dir: PathBuf) -> Vec<String> {
 fn link(v: Vec<String>) -> String {
     let mut builder = String::new();
     for i in v {
-        builder.push_str(&format!("pub use {i} as _;"));
+        builder.push_str(&format!("#[allow(unused_imports)]\npub use {i} as _;\n"));
     }
     builder
 }

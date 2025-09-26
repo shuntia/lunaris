@@ -4,7 +4,7 @@ use std::time::{Duration, Instant};
 use lunaris_api::egui::Ui;
 use lunaris_api::plugin::{Gui, Plugin, PluginContext, PluginReport};
 use lunaris_api::request::OrchestratorProfile;
-use lunaris_api::{export_plugin, util::error::NResult};
+use lunaris_api::{export_plugin, util::error::Result};
 
 export_plugin!(Profiler, [Gui]);
 
@@ -97,11 +97,11 @@ impl Plugin for Profiler {
         "Profiler"
     }
 
-    fn init(&self, _ctx: PluginContext<'_>) -> NResult {
+    fn init(&self, _ctx: PluginContext<'_>) -> Result {
         Ok(())
     }
 
-    fn update_world(&mut self, ctx: PluginContext<'_>) -> NResult {
+    fn update_world(&mut self, ctx: PluginContext<'_>) -> Result {
         // Frame timing
         self.profiles = Some(ctx.orch.profile());
         let now = Instant::now();

@@ -8,4 +8,5 @@ edition.workspace = true
 # BEGIN AUTO-PLUGINS
 dummy = { path = "../plugins/core/dummy" }
 profiler = { path = "../plugins/core/profiler" }
+timeline = { path = "../plugins/core/timeline" }
 # END AUTO-PLUGINS
