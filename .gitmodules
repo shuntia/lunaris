@@ -1,15 +1,15 @@
 [submodule "lunaris_core"]
 	path=lunaris_core
-	url=https://github.com/shuntia/lunaris_core
+	url=https://github.com/lunaris-systems/lunaris_core
 
 [submodule "lunaris_api"]
 	path=lunaris_api
-	url=https://github.com/shuntia/lunaris_api
+	url=https://github.com/lunaris-systems/lunaris_api
 
 [submodule "lunaris_ecs"]
 	path=lunaris_ecs
-	url=https://github.com/shuntia/lunaris_ecs
+	url=https://github.com/lunaris-systems/lunaris_ecs
 
 [submodule "lunac"]
 	path=tools/lunac
-	url=https://github.com/shuntia/lunac
+	url=https://github.com/lunaris-systems/lunac
