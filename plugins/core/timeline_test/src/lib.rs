@@ -1,11 +1,9 @@
-use lunaris_ecs::{bevy_ecs, prelude::*};
 use lunaris_api::{
     export_plugin,
-    plugin::{Gui, Plugin, PluginContext, PluginReport, UiState},
-    timeline::TimelineSpan,
+    plugin::{Gui, Plugin, PluginContext, PluginReport},
     util::error::Result,
 };
-use std::any::Any;
+use lunaris_ecs::{bevy_ecs, prelude::*};
 
 // --- Plugin-specific UI State ---
 
@@ -53,7 +51,9 @@ impl Plugin for TimelineTestPlugin {
         Ok(())
     }
 
-    fn report(&self, _ctx: PluginContext<'_>) -> PluginReport { PluginReport::Operational }
+    fn report(&self, _ctx: PluginContext<'_>) -> PluginReport {
+        PluginReport::Operational
+    }
     fn shutdown(&mut self, _ctx: PluginContext<'_>) {}
     fn reset(&mut self, _ctx: PluginContext<'_>) {}
 }

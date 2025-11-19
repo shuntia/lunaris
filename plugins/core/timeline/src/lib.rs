@@ -1,4 +1,3 @@
-use lunaris_ecs::{bevy_ecs, prelude::*};
 use lunaris_api::util::error::Result;
 use lunaris_api::{
     consts::tps,
@@ -6,6 +5,7 @@ use lunaris_api::{
     plugin::{Gui, Plugin, PluginContext, PluginReport},
     timeline::elements::TimelineElement,
 };
+use lunaris_ecs::{bevy_ecs, prelude::*};
 use std::collections::HashSet;
 
 export_plugin!(Timeline, id: "lunaris.core.timeline", [Gui]);
@@ -46,9 +46,10 @@ impl Plugin for Timeline {
     }
 
     fn init(&self, ctx: PluginContext<'_>) -> Result {
-        ctx.world.insert_resource(
-            lunaris_api::plugin::UiContext::new_clonable(TimelineUiState::default())
-        );
+        ctx.world
+            .insert_resource(lunaris_api::plugin::UiContext::new_clonable(
+                TimelineUiState::default(),
+            ));
         Ok(())
     }
 
@@ -86,7 +87,7 @@ impl Gui for Timeline {
         // Get UI state from World resource and clone it
         let mut st = {
             let ui_ctx = ctx.world.resource::<lunaris_api::plugin::UiContext<
-                lunaris_api::plugin::ArcSwapStorage<TimelineUiState>
+                lunaris_api::plugin::ArcSwapStorage<TimelineUiState>,
             >>();
             ui_ctx.read().clone()
         };
@@ -216,9 +217,10 @@ impl Gui for Timeline {
         }
 
         // Save state back to World
-        let ui_ctx = ctx.world.resource::<lunaris_api::plugin::UiContext<
-            lunaris_api::plugin::ArcSwapStorage<TimelineUiState>
-        >>();
+        let ui_ctx =
+            ctx.world.resource::<lunaris_api::plugin::UiContext<
+                lunaris_api::plugin::ArcSwapStorage<TimelineUiState>,
+            >>();
         let mut write = ui_ctx.write();
         *write = st;
         write.swap();

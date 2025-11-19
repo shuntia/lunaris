@@ -1,7 +1,7 @@
 use lunaris_api::{
     export_plugin,
-    prelude::*,
     plugin::{Plugin, PluginContext, PluginReport, RenderJob, RenderTask, Renderer},
+    prelude::*,
     render::{device, queue, RawImage},
 };
 
@@ -35,7 +35,8 @@ impl Plugin for TriangleRenderer {
             source: wgpu::ShaderSource::Wgsl(shader_code.into()),
         });
 
-        let pipeline_layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor::default());
+        let pipeline_layout =
+            device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor::default());
 
         let render_pipeline = device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
             label: Some("Triangle Pipeline"),
@@ -67,18 +68,24 @@ impl Plugin for TriangleRenderer {
     }
 
     // Other Plugin methods are empty
-    fn init(&self, _ctx: PluginContext<'_>) -> Result<()> { Ok(()) }
+    fn init(&self, _ctx: PluginContext<'_>) -> Result<()> {
+        Ok(())
+    }
     fn add_schedule(&self, _schedule: &mut lunaris_api::plugin::Schedule) -> Result<()> {
         Ok(())
     }
-    fn update_world(&mut self, _ctx: PluginContext<'_>) -> Result<()> { Ok(()) }
-    fn report(&self, _ctx: PluginContext<'_>) -> PluginReport { PluginReport::Operational }
+    fn update_world(&mut self, _ctx: PluginContext<'_>) -> Result<()> {
+        Ok(())
+    }
+    fn report(&self, _ctx: PluginContext<'_>) -> PluginReport {
+        PluginReport::Operational
+    }
     fn shutdown(&mut self, _ctx: PluginContext<'_>) {}
     fn reset(&mut self, _ctx: PluginContext<'_>) {}
 }
 
 impl Renderer for TriangleRenderer {
-    fn schedule_render(&self, job: RenderJob) -> Result<RenderTask> {
+    fn schedule_render(&self, _job: RenderJob) -> Result<RenderTask> {
         let pipeline = self.render_pipeline.clone();
 
         let render_future = async move {
@@ -90,7 +97,11 @@ impl Renderer for TriangleRenderer {
             // 1. Create a texture to render to
             let texture_desc = wgpu::TextureDescriptor {
                 label: Some("render_target"),
-                size: wgpu::Extent3d { width, height, depth_or_array_layers: 1 },
+                size: wgpu::Extent3d {
+                    width,
+                    height,
+                    depth_or_array_layers: 1,
+                },
                 mip_level_count: 1,
                 sample_count: 1,
                 dimension: wgpu::TextureDimension::D2,
@@ -102,7 +113,8 @@ impl Renderer for TriangleRenderer {
             let texture_view = texture.create_view(&Default::default());
 
             // 2. Create a command encoder and render pass
-            let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor::default());
+            let mut encoder =
+                device.create_command_encoder(&wgpu::CommandEncoderDescriptor::default());
             {
                 let mut render_pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                     label: Some("Triangle Render Pass"),
@@ -145,7 +157,7 @@ impl Renderer for TriangleRenderer {
 
             queue.submit(Some(encoder.finish()));
 
-            // 4. Map the buffer and create the RawImage  
+            // 4. Map the buffer and create the RawImage
             let buffer_slice = output_buffer.slice(..);
             let (tx, rx) = futures::channel::oneshot::channel();
             buffer_slice.map_async(wgpu::MapMode::Read, move |result| {
@@ -154,7 +166,7 @@ impl Renderer for TriangleRenderer {
             // Wait for the async operation
             rx.await.unwrap().unwrap();
             let data = buffer_slice.get_mapped_range().to_vec();
-            drop(buffer_slice); // unmap
+            let _ = buffer_slice; // unmap
 
             RawImage::from_rgba8(width, height, data)
         };

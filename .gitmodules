@@ -9,3 +9,7 @@
 [submodule "lunaris_ecs"]
 	path=lunaris_ecs
 	url=https://github.com/shuntia/lunaris_ecs
+
+[submodule "lunac"]
+	path=tools/lunac
+	url=https://github.com/shuntia/lunac

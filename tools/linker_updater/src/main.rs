@@ -119,7 +119,9 @@ fn read_dir_sorted(p: &Path) -> anyhow::Result<Vec<std::fs::DirEntry>> {
 fn read_package_name(cargo_toml: &Path) -> anyhow::Result<Option<(String, PathBuf)>> {
     let s = fs::read_to_string(cargo_toml)?;
     let v: Table = toml::from_str(&s)?;
-    if let Some(pkg) = v.get("package") && let Some(name) = pkg.get("name").and_then(|n| n.as_str()) {
+    if let Some(pkg) = v.get("package")
+        && let Some(name) = pkg.get("name").and_then(|n| n.as_str())
+    {
         let dir = cargo_toml
             .parent()
             .map(|p| p.to_path_buf())
