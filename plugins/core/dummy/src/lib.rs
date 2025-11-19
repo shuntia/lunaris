@@ -1,7 +1,7 @@
 use lunaris_api::{export_plugin, plugin::Plugin, util::error::Result};
 extern crate lunaris_api;
 
-export_plugin!(Dummy);
+export_plugin!(Dummy, id: "lunaris.core.dummy");
 
 pub struct Dummy {}
 
@@ -15,7 +15,15 @@ impl Plugin for Dummy {
     fn name(&self) -> &'static str {
         "dummy"
     }
-    fn reset(&mut self, _ctx: lunaris_api::plugin::PluginContext) {}
+    fn init(&self, _ctx: lunaris_api::plugin::PluginContext) -> Result {
+        Ok(())
+    }
+    fn add_schedule(&self, _schedule: &mut lunaris_api::plugin::Schedule) -> Result {
+        Ok(())
+    }
+    fn update_world(&mut self, _ctx: lunaris_api::plugin::PluginContext) -> Result {
+        Ok(())
+    }
     fn report(
         &self,
         _ctx: lunaris_api::plugin::PluginContext,
@@ -23,11 +31,6 @@ impl Plugin for Dummy {
         lunaris_api::plugin::PluginReport::Operational
     }
     fn shutdown(&mut self, _ctx: lunaris_api::plugin::PluginContext) {}
-    fn update_world(&mut self, _ctx: lunaris_api::plugin::PluginContext) -> Result {
-        Ok(())
-    }
+    fn reset(&mut self, _ctx: lunaris_api::plugin::PluginContext) {}
     fn register_menu(&self, _menu_bar: &mut lunaris_api::egui::MenuBar) {}
-    fn init(&self, _ctx: lunaris_api::plugin::PluginContext) -> Result {
-        Ok(())
-    }
 }

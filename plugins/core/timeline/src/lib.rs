@@ -1,4 +1,4 @@
-use bevy_ecs::prelude::*;
+use lunaris_ecs::{bevy_ecs, prelude::*};
 use lunaris_api::util::error::Result;
 use lunaris_api::{
     consts::tps,
@@ -8,14 +8,14 @@ use lunaris_api::{
 };
 use std::collections::HashSet;
 
-export_plugin!(Timeline, [Gui]);
+export_plugin!(Timeline, id: "lunaris.core.timeline", [Gui]);
 
 pub struct Timeline {
     tick_freq: u64,
 }
 
-#[derive(Resource)]
-struct TimelineUiState {
+#[derive(Resource, Clone)]
+pub struct TimelineUiState {
     ticks_per_px: f64,
     scroll_x_ticks: f64,
     scroll_y_px: f32,
@@ -46,9 +46,13 @@ impl Plugin for Timeline {
     }
 
     fn init(&self, ctx: PluginContext<'_>) -> Result {
-        if !ctx.world.contains_resource::<TimelineUiState>() {
-            ctx.world.insert_resource(TimelineUiState::default());
-        }
+        ctx.world.insert_resource(
+            lunaris_api::plugin::UiContext::new_clonable(TimelineUiState::default())
+        );
+        Ok(())
+    }
+
+    fn add_schedule(&self, _schedule: &mut lunaris_ecs::Schedule) -> Result {
         Ok(())
     }
 
@@ -79,13 +83,13 @@ impl Plugin for Timeline {
 
 impl Gui for Timeline {
     fn ui(&self, ui: &mut egui::Ui, ctx: PluginContext<'_>) {
-        if !ctx.world.contains_resource::<TimelineUiState>() {
-            ctx.world.insert_resource(TimelineUiState::default());
-        }
-        let mut st = ctx
-            .world
-            .remove_resource::<TimelineUiState>()
-            .unwrap_or_default();
+        // Get UI state from World resource and clone it
+        let mut st = {
+            let ui_ctx = ctx.world.resource::<lunaris_api::plugin::UiContext<
+                lunaris_api::plugin::ArcSwapStorage<TimelineUiState>
+            >>();
+            ui_ctx.read().clone()
+        };
 
         // Layout constants
         const TOP_H: f32 = 22.0;
@@ -211,8 +215,13 @@ impl Gui for Timeline {
             st.ticks_per_px = self.tick_freq as f64 / zoom.max(1.0) as f64;
         }
 
-        // Return state
-        ctx.world.insert_resource(st);
+        // Save state back to World
+        let ui_ctx = ctx.world.resource::<lunaris_api::plugin::UiContext<
+            lunaris_api::plugin::ArcSwapStorage<TimelineUiState>
+        >>();
+        let mut write = ui_ctx.write();
+        *write = st;
+        write.swap();
     }
 }
 
@@ -244,7 +253,7 @@ fn draw_time_grid(
             [egui::pos2(x, rect.top()), egui::pos2(x, rect.bottom())],
             egui::Stroke::new(1.0, col),
         );
-        if (t - first) / step % 5 == 0 {
+        if ((t - first) / step).is_multiple_of(5) {
             p.text(
                 egui::pos2(x + 3.0, rect.top() + 2.0),
                 egui::Align2::LEFT_TOP,

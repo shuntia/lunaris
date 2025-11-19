@@ -5,7 +5,7 @@ authors.workspace = true
 edition.workspace = true
 
 [dependencies]
-bevy_ecs.workspace = true
+lunaris_ecs.workspace = true
 inventory.workspace = true
 lunaris_api.workspace = true
 

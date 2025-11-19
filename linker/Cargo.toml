@@ -7,6 +7,8 @@ edition.workspace = true
 [dependencies]
 # BEGIN AUTO-PLUGINS
 dummy = { path = "../plugins/core/dummy" }
+timeline_test = { path = "../plugins/core/timeline_test" }
+triangle_renderer = { path = "../plugins/core/triangle_renderer" }
 profiler = { path = "../plugins/core/profiler" }
 timeline = { path = "../plugins/core/timeline" }
 # END AUTO-PLUGINS

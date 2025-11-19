@@ -6,8 +6,9 @@ use lunaris_api::plugin::{Gui, Plugin, PluginContext, PluginReport};
 use lunaris_api::request::OrchestratorProfile;
 use lunaris_api::{export_plugin, util::error::Result};
 
-export_plugin!(Profiler, [Gui]);
+export_plugin!(Profiler, id: "lunaris.core.profiler", [Gui]);
 
+#[derive(Clone)]
 pub struct Profiler {
     start: Instant,
     last_frame: Instant,
@@ -98,6 +99,10 @@ impl Plugin for Profiler {
     }
 
     fn init(&self, _ctx: PluginContext<'_>) -> Result {
+        Ok(())
+    }
+
+    fn add_schedule(&self, _schedule: &mut lunaris_api::plugin::Schedule) -> Result {
         Ok(())
     }
 
