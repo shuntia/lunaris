@@ -2543,8 +2543,6 @@ dependencies = [
  "dummy",
  "profiler",
  "timeline",
- "timeline_test",
- "triangle_renderer",
 ]
 
 [[package]]
@@ -4354,16 +4352,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "timeline_test"
-version = "0.1.0"
-dependencies = [
- "egui",
- "inventory",
- "lunaris_api",
- "lunaris_ecs",
-]
-
-[[package]]
 name = "tiny-skia"
 version = "0.11.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4574,16 +4562,6 @@ dependencies = [
  "tracing",
  "tracing-core",
  "tracing-log",
-]
-
-[[package]]
-name = "triangle_renderer"
-version = "0.1.0"
-dependencies = [
- "futures",
- "inventory",
- "lunaris_api",
- "wgpu",
 ]
 
 [[package]]
