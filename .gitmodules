@@ -5,3 +5,7 @@
 [submodule "lunaris_api"]
 	path=lunaris_api
 	url=https://github.com/shuntia/lunaris_api
+
+[submodule "lunaris_ecs"]
+	path=lunaris_ecs
+	url=https://github.com/shuntia/lunaris_ecs

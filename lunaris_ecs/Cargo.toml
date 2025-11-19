@@ -1,8 +1,0 @@
-[package]
-name = "lunaris_ecs"
-version = "0.1.0"
-authors.workspace = true
-edition.workspace = true
-
-[dependencies]
-bevy_ecs = { workspace = true, features = ["multi_threaded", "trace"] }
