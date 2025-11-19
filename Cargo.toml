@@ -8,8 +8,8 @@ authors = ["shuntia<shuntia@shuntia.net>"]
 edition = "2024"
 
 [workspace.dependencies]
-bevy_ecs = "0.17.2"
-egui = "0.33.0"
+bevy_ecs = "0.17.3"
+egui = "0.33.2"
 fluent = "0.17.0"
 futures = "0.3.31"
 inventory = "0.3.21"
