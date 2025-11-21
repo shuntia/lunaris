@@ -1,0 +1,15 @@
+[package]
+name = "lunaris_linker"
+version = "0.1.0"
+authors.workspace = true
+edition.workspace = true
+description = "Plugin linker for Lunaris"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+# BEGIN AUTO-PLUGINS
+dummy = { path = "../../plugins/core/dummy" }
+profiler = { path = "../../plugins/core/profiler" }
+timeline = { path = "../../plugins/core/timeline" }
+video = { path = "../../plugins/core/video" }
+# END AUTO-PLUGINS

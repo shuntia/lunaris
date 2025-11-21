@@ -1,13 +1,17 @@
-[submodule "lunaris_core"]
-	path=lunaris_core
-	url=https://github.com/lunaris-systems/lunaris_core
+[submodule "lunaris_runtime"]
+	path=crates/lunaris_runtime
+	url=https://github.com/lunaris-systems/lunaris_runtime
+
+[submodule "lunaris_app"]
+	path=bin/lunaris
+	url=https://github.com/lunaris-systems/lunaris_app
 
 [submodule "lunaris_api"]
-	path=lunaris_api
+	path=crates/lunaris_api
 	url=https://github.com/lunaris-systems/lunaris_api
 
 [submodule "lunaris_ecs"]
-	path=lunaris_ecs
+	path=crates/lunaris_ecs
 	url=https://github.com/lunaris-systems/lunaris_ecs
 
 [submodule "lunac"]

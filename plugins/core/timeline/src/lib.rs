@@ -3,12 +3,14 @@ use lunaris_api::{
     consts::tps,
     egui, export_plugin,
     plugin::{Gui, Plugin, PluginContext, PluginReport},
-    timeline::elements::TimelineElement,
 };
-use lunaris_ecs::{bevy_ecs, prelude::*};
+use lunaris_ecs::prelude::*;
 use std::collections::HashSet;
 
-export_plugin!(Timeline, id: "lunaris.core.timeline", [Gui]);
+mod components;
+use components::TimelineElement;
+
+export_plugin!(Timeline, id: "lunaris.core.timeline", name: "Timeline", [Gui]);
 
 pub struct Timeline {
     tick_freq: u64,
@@ -41,10 +43,6 @@ impl Default for TimelineUiState {
 }
 
 impl Plugin for Timeline {
-    fn name(&self) -> &'static str {
-        "Timeline"
-    }
-
     fn init(&self, ctx: PluginContext<'_>) -> Result {
         ctx.world
             .insert_resource(lunaris_api::plugin::UiContext::new_clonable(

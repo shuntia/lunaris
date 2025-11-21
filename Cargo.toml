@@ -1,7 +1,7 @@
 [workspace]
 resolver = "3"
-members = ["linker", "lunaris_api", "lunaris_core", "lunaris_ecs", "plugins/*/*", "tools/*"]
-default-members = ["lunaris_api", "lunaris_core", "plugins/*/*"]
+members = ["crates/lunaris_linker", "crates/lunaris_api", "crates/lunaris_runtime", "bin/lunaris", "crates/lunaris_ecs", "crates/lunaris_ecs/derive", "plugins/*/*", "tools/*"]
+default-members = ["crates/lunaris_api", "bin/lunaris", "plugins/*/*"]
 
 [workspace.package]
 authors = ["shuntia<shuntia@shuntia.net>"]
@@ -13,9 +13,9 @@ egui = "0.33.2"
 fluent = "0.17.0"
 futures = "0.3.31"
 inventory = "0.3.21"
-linker = { path = "linker" }
-lunaris_api = { path = "lunaris_api" }
-lunaris_ecs = { path = "lunaris_ecs" }
+lunaris_linker = { path = "crates/lunaris_linker", version = "0.1.0" }
+lunaris_api = { path = "crates/lunaris_api", version = "0.1.0" }
+lunaris_ecs = { path = "crates/lunaris_ecs", version = "0.1.0" }
 slab = "0.4.11"
 thiserror = "2.0.17"
 tokio = { version = "1.48.0", features = ["full", "tracing"] }
@@ -23,7 +23,4 @@ toml = "0.9.8"
 tracing = "0.1.41"
 tracing-subscriber = "0.3.20"
 wgpu = "27.0.1"
-
-[workspace.dependencies.serde]
-version = "1.0.228"
-features = ["derive"]
+serde={version = "1.0.228", features = ["derive"]}

@@ -1,0 +1,15 @@
+[package]
+name = "video"
+version = "0.1.0"
+authors.workspace = true
+edition.workspace = true
+
+[features]
+default = []
+real_ffmpeg = ["dep:ffmpeg-next"]
+
+[dependencies]
+lunaris_api.workspace = true
+lunaris_ecs.workspace = true
+ffmpeg-next = { version = "8.0.0", optional = true }
+inventory.workspace = true

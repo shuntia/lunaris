@@ -1,7 +1,7 @@
 use lunaris_api::{export_plugin, plugin::Plugin, util::error::Result};
 extern crate lunaris_api;
 
-export_plugin!(Dummy, id: "lunaris.core.dummy");
+export_plugin!(Dummy, id: "lunaris.core.dummy", name: "dummy");
 
 pub struct Dummy {}
 
@@ -11,9 +11,6 @@ impl Plugin for Dummy {
         Self: Sized,
     {
         Dummy {}
-    }
-    fn name(&self) -> &'static str {
-        "dummy"
     }
     fn init(&self, _ctx: lunaris_api::plugin::PluginContext) -> Result {
         Ok(())

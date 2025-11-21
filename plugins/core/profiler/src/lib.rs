@@ -94,10 +94,6 @@ impl Plugin for Profiler {
         Self::default()
     }
 
-    fn name(&self) -> &'static str {
-        "Profiler"
-    }
-
     fn init(&self, _ctx: PluginContext<'_>) -> Result {
         Ok(())
     }

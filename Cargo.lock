@@ -537,7 +537,7 @@ dependencies = [
  "anyhow",
  "arrayvec",
  "log",
- "nom",
+ "nom 8.0.0",
  "num-rational",
  "v_frame",
 ]
@@ -704,6 +704,24 @@ dependencies = [
  "bevy_platform",
  "disqualified",
  "thread_local",
+]
+
+[[package]]
+name = "bindgen"
+version = "0.72.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "993776b509cfb49c750f11b8f07a46fa23e0a1386ffc01fb1e7d343efc387895"
+dependencies = [
+ "bitflags 2.10.0",
+ "cexpr",
+ "clang-sys",
+ "itertools 0.12.1",
+ "proc-macro2",
+ "quote",
+ "regex",
+ "rustc-hash 2.1.1",
+ "shlex",
+ "syn",
 ]
 
 [[package]]
@@ -915,6 +933,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6d43a04d8753f35258c91f8ec639f792891f748a1edbd759cf1dcea3382ad83c"
 
 [[package]]
+name = "cexpr"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6fac387a98bb7c37292057cffc56d62ecb629900026402633ae9160df93a8766"
+dependencies = [
+ "nom 7.1.3",
+]
+
+[[package]]
 name = "cfg-expr"
 version = "0.15.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -943,6 +970,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0ced0551234e87afee12411d535648dd89d2e7f34c78b753395567aff3d447ff"
 dependencies = [
  "libc",
+]
+
+[[package]]
+name = "clang-sys"
+version = "1.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0b023947811758c97c59bf9d1c188fd619ad4718dcaa767947df1cadb14f39f4"
+dependencies = [
+ "glob",
+ "libc",
+ "libloading",
 ]
 
 [[package]]
@@ -1686,6 +1724,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "ffmpeg-next"
+version = "8.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d658424d233cbd993a972dd73a66ca733acd12a494c68995c9ac32ae1fe65b40"
+dependencies = [
+ "bitflags 2.10.0",
+ "ffmpeg-sys-next",
+ "libc",
+]
+
+[[package]]
+name = "ffmpeg-sys-next"
+version = "8.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9bca20aa4ee774fe384c2490096c122b0b23cf524a9910add0686691003d797b"
+dependencies = [
+ "bindgen",
+ "cc",
+ "libc",
+ "num_cpus",
+ "pkg-config",
+ "vcpkg",
+]
+
+[[package]]
 name = "find-msvc-tools"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1970,6 +2033,12 @@ checksum = "bd47b05dddf0005d850e5644cae7f2b14ac3df487979dbfff3b56f20b1a6ae46"
 dependencies = [
  "serde_core",
 ]
+
+[[package]]
+name = "glob"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0cc23270f6e1808e30a928bdc84dea0b9b4136a8bc82338574f23baf47bbd280"
 
 [[package]]
 name = "glow"
@@ -2537,15 +2606,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "linker"
-version = "0.1.0"
-dependencies = [
- "dummy",
- "profiler",
- "timeline",
-]
-
-[[package]]
 name = "linker_updater"
 version = "0.1.0"
 dependencies = [
@@ -2603,15 +2663,25 @@ dependencies = [
 
 [[package]]
 name = "lunac"
-version = "0.1.1"
+version = "0.1.4"
 dependencies = [
  "anyhow",
  "clap",
 ]
 
 [[package]]
+name = "lunaris"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "lunaris_runtime",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "lunaris_api"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
  "arc-swap",
  "bytes",
@@ -2636,7 +2706,34 @@ dependencies = [
 ]
 
 [[package]]
-name = "lunaris_core"
+name = "lunaris_derive"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "lunaris_ecs"
+version = "0.1.0"
+dependencies = [
+ "bevy_ecs",
+ "lunaris_derive",
+]
+
+[[package]]
+name = "lunaris_linker"
+version = "0.1.0"
+dependencies = [
+ "dummy",
+ "profiler",
+ "timeline",
+ "video",
+]
+
+[[package]]
+name = "lunaris_runtime"
 version = "0.1.0"
 dependencies = [
  "bevy_utils",
@@ -2649,9 +2746,9 @@ dependencies = [
  "egui_tiles",
  "futures",
  "inventory",
- "linker",
  "lunaris_api",
  "lunaris_ecs",
+ "lunaris_linker",
  "mimalloc",
  "native-dialog",
  "notify-rust",
@@ -2666,13 +2763,6 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
  "wgpu",
-]
-
-[[package]]
-name = "lunaris_ecs"
-version = "0.1.0"
-dependencies = [
- "bevy_ecs",
 ]
 
 [[package]]
@@ -2771,6 +2861,12 @@ checksum = "e1ee66a4b64c74f4ef288bcbb9192ad9c3feaad75193129ac8509af543894fd8"
 dependencies = [
  "libmimalloc-sys",
 ]
+
+[[package]]
+name = "minimal-lexical"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "68354c5c6bd36d73ff3feceb05efa59b6acb7626617f4962be322a825e61f79a"
 
 [[package]]
 name = "miniz_oxide"
@@ -2907,6 +3003,16 @@ name = "nohash-hasher"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2bf50223579dc7cdcfb3bfcacf7069ff68243f8c363f62ffa99cf000a6b9c451"
+
+[[package]]
+name = "nom"
+version = "7.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d273983c5a657a70a3e8f2a01329822f3b8c8172b73826411a55751e404a0a4a"
+dependencies = [
+ "memchr",
+ "minimal-lexical",
+]
 
 [[package]]
 name = "nom"
@@ -3786,6 +3892,18 @@ dependencies = [
  "getrandom 0.2.16",
  "libredox",
  "thiserror 2.0.17",
+]
+
+[[package]]
+name = "regex"
+version = "1.12.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "843bc0191f75f3e22651ae5f1e72939ab2f72a4bc30fa80a066bd66edefc24d4"
+dependencies = [
+ "aho-corasick",
+ "memchr",
+ "regex-automata",
+ "regex-syntax",
 ]
 
 [[package]]
@@ -4709,6 +4827,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "vcpkg"
+version = "0.2.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "accd4ea62f7bb7a82fe23066fb0957d48ef677f6eeb8215f372f52e48bb32426"
+
+[[package]]
 name = "version-compare"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4727,7 +4851,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "80a7e511ce1795821207a837b7b1c8d8aca0c648810966ad200446ae58f6667f"
 dependencies = [
  "itertools 0.14.0",
- "nom",
+ "nom 8.0.0",
+]
+
+[[package]]
+name = "video"
+version = "0.1.0"
+dependencies = [
+ "ffmpeg-next",
+ "inventory",
+ "lunaris_api",
+ "lunaris_ecs",
 ]
 
 [[package]]
